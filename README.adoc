@@ -1,0 +1,804 @@
+= Lisp Glossary
+
+== A
+
+acc -- a common abbreviation of _accumulator_
+
+accumulator -- any object meant to accumulate the results of a
+computation as they become available, to be returned at the end.
+particular examples are (1) the argument of a reducer (2) an
+accumulator register for the result of arithmetic in a computer
+processor.
+
+accumulator generator -- a short function that returns a closure to
+increment numbers. intended to demonstrate the expressive power of
+Lisp.
+
+advice -- a method set to run before or after another method is
+called. Available in the Common Lisp Object System as well as Emacs
+Lisp.
+
+alien -- adjective: foreign data from C/FFI. noun: a foreign object.
+
+alist -- an association list, a common way to store associative arrays
+in Lisp. an alist can store duplicate keys. a hash table (an opaque
+data type provided by all the popular Lisp implementations) is
+commonly used for faster lookup when the order of the keys doesn't
+matter and duplicate keys are not needed.
+
+anaphoric macro -- A macro that uses _variable capture_ to define a
+convenient symbol such as `it` or `them`.
+
+ANSI Common Lisp -- (1) See _Common Lisp_. (2) A book-length tutorial
+on said language by Paul Graham.
+
+apply -- Call a function (closure) with its arguments. See also
+_eval_.
+
+Arc -- a recent experimental dialect of Lisp designed by Paul Graham
+with the goals of brevity and generality. Has since spawned several
+offshoot projects by others.
+
+AutoLISP -- The Lisp dialect that serves as the extension language of
+the AutoCAD computer-aided design system.
+
+== B
+
+bignum -- (Abbreviation of "big number".) An arbitrarily large or
+small number (usually an integer) whose magnitude is limited only by
+available memory. Allocated on the heap as opposed to a _fixnum_ which
+fits in a CPU register. Most popular Lisp dialects offer the
+programmer a seamless interface to all numbers, automatically
+converting between fixnums and bignums as needed. This tradition of
+"getting numbers right" is so strong that lacking or difficult-to-use
+bignums are a common gripe of Lisp programmers when they use other
+languages (or when they encounter a Lisp dialect that isn't as
+seamless). Some empirical analysis of bignums suggests that most
+numbers in a Lisp system fit in a fixnum, most of the remaining ones
+fit in bignums that are the size of only two fixnums, and hardly any
+numbers are bigger than that. This means that the amortized cost of
+auto-promoting numbers to bignums is very small.
+
+binding -- (1) code to let programmers access a particular
+foreign/alien library from Lisp with the same programming interface
+they use to access libraries written in Lisp itself; also called
+_wrapper_ (2) see _key binding_
+
+Boids -- A 3D animation simulating the flocking behavior of birds in
+flight. Made at the Symbolics graphics division.
+
+bootstrap -- the ubiquitous technical term "boot" is a shortened form
+of "bootstrap".
+
+byte-compile -- Turn the text of Lisp source code into binary code for
+a particular virtual machine. The point is that the bytecode runs
+faster and often takes less space.
+
+bytecode -- Binary code for a virtual machine. May or may not contain
+debug information.
+
+== C
+
+car -- Contents of Address part of Register
+
+CADR -- the second early version of the MIT Lisp Machine hardware. The
+firs was _CONS_.
+
+call/cc -- the usual abbreviation of `call-with-current-continuation`
+
+call-with-current-continuation -- see _continuation_
+
+Chaosnet -- An early computer network similar to Ethernet. Developed
+and used at MIT around the same time until Ethernet took over the
+world. The word _chaos_ meant the network was designed not to have a
+central arbiter to manage it (i.e. it was peer-to-peer). Chaosnet was
+the native computer network of the MIT Lisp machines.
+
+Chine Nual -- The MIT Lisp Machine Manual. Humorously shortened
+because the book's cover is typeset so that only these partial words
+are visible on the front.
+
+Chinual -- see _Chine Nual_.
+
+circular list -- A list where the cdr of the "last" cons cell points
+back to the first cons cell. This creates a never-ending list: if you
+traverse the list by repeated calls to cdr, it keeps cycling through
+its elements forever. You can pass around any cons cell in the list,
+and traversing from that cons cell will produce the same elements as
+starting from any other cons cell, just in a different order. The
+`length` function in most lisps does not check for a circular list so
+it will hang. There tends to be a separate `list-length` function that
+checks. The Lisp printer will also loop forever under some
+circumstances when trying to print a circular list, unless it is also
+told to check.
+
+cold load -- See also _load band_.
+
+constant variable --
+
+continuation --
+
+cdr -- Contents of Decrement part of Register
+
+Church numerals -- a representation of the natural numbers as
+recursive functions.
+
+Church-Turing thesis -- A prominent mathematical result that proves
+that the lambda calculus and Turing machines are equally powerful
+(they can compute the same functions).
+
+CLHS -- See _Common Lisp HyperSpec_.
+
+CLIM -- The Common Lisp Interface Manager, a standard graphical user
+interface framework based on Dynamic Windows from Genera. CLIM is
+based around a CLOS object model and a command loop where the user
+enters a command which then modifies the model. Different views can
+render the model on the screen. Commands can be entered in different
+ways, using keyboard and mouse input or by calling CLOS methods from
+Lisp code.
+
+Clojure -- A recent dialect of Lisp centered around immutable data
+structures and concurrency. Runs mainly on the Java Virtual Machine
+with work-in-progress ports to other virtual machines. The name comes
+from _closure_ and Java.
+
+closure -- The usual way to say _lexical closure_.
+
+Common Lisp -- An ANSI standard Lisp dialect that continues the
+tradition of Maclisp but with lexical scope by default. Notable for an
+incredibly thorough specification that carefully considers every minor
+detail. The flip side is that the language was massive for its time
+and the specification can be impenetrable to newcomers. Common Lisp is
+the most traditional of the popular Lisp dialects and had to suffer
+many aesthetic compromises due to the historical baggage. Nonetheless
+it remains practical. Notable features are extremely powerful object
+and condition systems, a wide range of numerical types and fast
+compound data structures, wide support for abstract data types and
+generic programming, and extremely versatile iteration and format
+string facilities. Common Lisp also has many standard features for the
+sole purpose of writing optimized or low-level code, making it the
+traditional dialect of choice for "industrial" applications.
+
+Common Lisp HyperSpec -- (Often shortened to CLHS.) A hypertext (HTML)
+version of the Common Lisp standard. Several copies are free to browse
+on the web. The CLHS is so convenient that it quickly became the
+default way to read the standard, and remains so to this day.
+
+condition system -- The Lisp term for exception handling. Often more
+powerful than in typical languages (see _restart_).
+
+condition -- an error or other signal in a Lisp condition system; see
+_condition system_
+
+core --
+
+CLOS -- The Common Lisp Object System. An extremely powerful
+object-oriented sub-language defined as part of standard Common Lisp.
+Supports multiple inheritance, multiple dispatch and method
+combination.
+
+CLOS MOP -- A Meta-Object Protocol for CLOS.
+
+cons -- (from "construct") noun (cons cell): a pair of two objects,
+car and cdr (also called first and rest, or head and tail, rarely
+shortened to hd and tl). verb: to allocate a cons cell or, more
+loosly, to allocate any kind of object on the heap.
+
+CONS -- The first Lisp Machine architecture designed and built at MIT.
+
+cxr -- all possible combinations of the car and cdr procedures up to a
+particular length. e.g. car, cdr, caar, cadr, cdar, cddr.
+
+== D
+
+docstring (also doc string, from "documentation string") --
+
+Document Examiner -- the hypertext documentation browser of the Genera Lisp OS
+
+dynamic extent --
+
+dynamic-wind --
+
+Dynamic Windows -- The graphical user interface of the Genera
+operating system on Symbolics Lisp machines.
+
+== E
+
+Eine --
+
+ELIZA -- An early Artificial Intelligence program that used natural
+language processing to simulate a Rogerian psychotherapist. A version
+comes with GNU Emacs as M-x doctor.
+
+EMACS -- A family of text editors that are extremely popular with Lispers.
+
+Emacs Lisp -- The dialect of Lisp used as the extension language in
+the GNU Emacs text editor (and its now-moribund fork, XEmacs nee Lucid
+Emacs). Emacs Lisp is often shortened to _ELisp_ or _elisp_ and its
+source files usually have the file name extension `.el`. Byte-compiled
+
+Ersatz EMACS -- A slightly tongue-in-cheek term suggested by Richard
+Stallman to refer to Emacs-like text editors that don't have a
+reasonably full-featured Lisp system in which to write extensions. The
+implication is that the Lisp system is a significant portion of the
+appeal of Emacs, and people who only use the ready-made features and
+key bindings from Emacs
+
+element -- one item in a list, vector or array.
+
+eval -- (abbreviation of "evaluate").
+
+Explorer -- see TI Explorer
+
+extent --
+
+== F
+
+fixnum -- (Abbreviation of "fixed-width number".) A fast but
+space-constrained integer representation that usually fits in a
+general-purpose register on the hardware CPU. Most popular Lisp
+implementations automatically convert a number from a fixnum into a
+_bignum_ when the result of a calculation does not fit in a fixnum.
+
+Flavors -- the object system on the Symbolics Lisp Machines, later
+somewhat displaced by the standard CLOS
+
+fluid --
+
+fold -- the fundamental iterator in functional programming
+
+form -- a S-expression before it is evaluated to produce a Lisp object
+
+== G
+
+garbage collection -- the most popular system of automatic memory
+management in modern programming languages, born in the Lisp
+community.
+
+GC -- see _garbage collection_.
+
+Genera -- the version of the MIT Lisp Machine operating system
+maintained and developed by Symbolics, Inc.
+
+generation -- generational garbage collection is a GC implementation
+technique in which separate parts of the heap are reserved for "young"
+and "old" objects. there may be more generations than these two. When
+analyzing GC performance, people talk of a particular object belonging
+to a particular generation.
+
+gensym -- (from "generate symbol"). (1) a function that
+
+GNU Emacs -- The definitive text editor in the Emacs family. Contains
+its own Lisp system which has also been used to write the majority of
+the code that comes with Emacs itself. Due to its Lisp system and
+longevity, countless extension packages are available around the
+internet, with new extensions still being made daily.
+
+Greenspun's Tenth Rule of Programming -- "Any sufficiently complicated
+C or Fortran program contains an ad-hoc, informally specified,
+bug-ridden, slow implementation of half of Common Lisp." Corollary
+from Robert Morris: "...including Common Lisp." (Several Common Lisp
+implementations are written in C.) It is not known whether the other
+nine rules exist.
+
+greenspunning -- the act of writing an interpreter
+
+== H
+
+heap -- non-stack memory for Lisp objects managed by the garbage
+collector. alien objects may not live here.
+
+hygienic macro system -- a macro definition framework that prevents
+macros from "capturing" variables
+
+== I
+
+idempotent -- (Said of a function, or occasionally of some other
+operation, even an entire program.) Can be called arbitrarily many
+times and will return the same result every time. All pure functions
+(i.e. functions with no side effects) are idempotent. The word comes
+from mathematics.
+
+IEEE Scheme -- a standardized but now moribund version of Scheme
+
+image -- (1) see _lisp image_; (2) a picture represented as an array
+of pixels, just like in other programming languages.
+
+improper list -- a list where the cdr of the last cons cell is not nil
+(and also not a cons cell; i.e. it is not a _circular list_).
+
+Interlisp -- The Lisp implementation from Xerox. Notable for its
+advanced graphical developent environment and for eschewing recursion
+in its Lisp dialect.
+
+Interlisp-D -- InterLisp implementations running on the Xerox D-series
+workstations (Dolphin, Dandelion, Dandetiger, Daybreak, Dorado).
+
+intern -- store a string constant in a hash table so that it can be
+then referred by its hash code instead of its contents. All Lisp
+symbols are usually interned in a global symbol table for fast lookup.
+Generally strings in such a table are called interned strings, but
+symbols are so central to Lisp that they are called just symbols.
+
+ISLISP -- (Also ISLisp.) A Lisp dialect standardized by the ISO
+(International Organization for Standardization) and IEC
+(International Electrotechnical Commission) joint working group
+informally called WG16. It was made to define a small, core language
+to help bridge the gap between Common Lisp, EuLisp, Le Lisp, and
+Scheme and standardize only those features shared between them.
+
+ITS -- The Incompatible Timesharing System, an early operating system
+at the MIT AI lab. Lisp was implemented on top of this operating
+system until dedicated Lisp Machines were built. Many ITS fans
+disapproved of Unix and a small rivalry developed between aficionados
+of the two. Unix won and completely displaced ITS.
+
+Ivory -- The processor (CPU) of Lisp Machines from Symbolics, Inc.
+
+== K
+
+key binding -- keyboard command; keyboard shortcut
+
+keyword -- a symbol name prefixed or suffixed by a colon (depending on
+Lisp dialect). Common Lisp has a special KEYWORD package where
+keywords are interned.
+
+_keyword argument_ -- The Lisp way to pass a function argument by name
+instead of by position. See also _keyword_.
+
+Knights of the Lambda Calculus -- a semi-fictional organization of
+expert Lisp and Scheme hackers. The name refers to the lambda calculus
+and the Knights Templar. The concept most likely originated at MIT.
+
+== L
+
+lambda -- (1) The Greek letter that begins a function definition in
+lambda calculus. Note that a lowercase lambda is always used around
+lambda calculus and Lisp, but naturally the Greek alphabet also
+features an uppercase lambda. (2) The equivalent operator in most Lisp
+dialects to define an anonymous function or closure. A couple of
+dialects use `fn` (meaning "function") because it is shorter. In a few
+implementations with stable support for international character sets
+the letter lambda from the Greek alphabet can be used directly. This
+is favored by some lispers because Lisp programs, particularly those
+written in a functional style, tend to use lambda all over the place.
+(3) The LMI Lambda, the Lisp Machine built by Lisp Machines, Inc.
+
+lambda calculus -- A mathematical formalism and model of computation
+based around recursive functions. Developed primarily by Alonzo
+Church. Lisp is based on untyped lambda calculus; statically typed
+functional languages tend to be based on typed lambda calculus. See
+also _Church-Turing Thesis_.
+
+lambda list -- The argument list of a function, macro or some other
+callable thing.
+
+Lambda the Ultimate -- (1) An influential and revered series of
+academic papers documenting the Lisp research and development at MIT.
+(2) A current blog ("Lambda the Ultimate Weblog") aggregating links
+about the theory and practice of implementing advanced programming
+languages.
+
+lamda -- The preferred transliteration of _lambda_ in some countries
+(notably Greece itself).
+
+lexical closure -- (Always shortened to just _closure_, except to make
+an educational point.) The combination of a function and the
+"captured" variables around it that it needs to operate. The closure
+is passed around as value, and looks to the programmer like an
+ordinary function. But whenever the function is called, the code
+inside the function can access all the variables in the closure. If
+the closure is called more than once, each call remembers the variable
+values from the previous call. In this way, a closure can be thought
+of as a function that keeps state. Or, coming from an object-oriented
+background, as an object with only one method, and calling the object
+itself means calling that method. The common way to make a closure in
+Lisp is to put a `let` (defining the captured variables) around a
+`lambda` (defining the function). However, many other macros and
+special forms implicitly create a closure because they translate into
+`let`/`lambda` or equivalent primitives under the hood. As a final
+mind bender, consider that `let` itself could be implemented in terms
+of `lambda` (when a `lambda` takes arguments, those arguments are
+included among the variables captured by the closure).
+
+Lisp -- (A questionable pun on _List Processing_.) Originally spelled
+in all capital letters as LISP due to the limitations of the computers
+of the time, but nowadays always spelled Lisp.
+
+lisp-1 -- Any Lisp dialect in which functions and variables live
+together in the same namespace. Scheme is a lisp-1. Other examples are
+Clojure and Arc. A lisp-1 style tends to go well with functional
+programming because use of higher-order functions looks more natural.
+On the other hand, namespace hygiene is a bigger concern when there is
+more potential for name clashes, so it is a tradeoff.
+
+Lisp 1.5 -- The earliest famous version of Lisp from MIT.
+
+lisp-2 -- Any Lisp dialect in which functions and variables live in
+separate namespaces. Common Lisp is a lisp-2. Another example is Emacs
+Lisp.
+
+lisp image -- A binary representation of Lisp programming session,
+saved to disk so that it can be loaded back later and the programmer
+can continue working on it.
+
+Lisp machine -- A computer whose processor (CPU) is designed to
+execute a Lisp-like language instead of a C-like language. Most if not
+all Lisp machines actually used microcode for the sophisticated Lisp
+stuff. Lisp Machines were made by MIT, LMI, Symbolics and Xerox.
+
+Lisp Machine Lisp --
+
+Lisp Machines, Inc. -- one of two companies founded to commercialize
+the MIT Lisp Machine project
+
+Lisp OS -- any computer operating system where the entire OS is one
+unified Lisp system, and all the system software (including hardware
+device drivers) is written in Lisp.
+
+lisper -- a Lisp programmer
+
+lisperati -- A mildly tongue-in-cheek adaptation of the word
+_literati_ to refer to people who know and love Lisp.
+
+list -- in most (if not all) Lisp dialects, a list is stored as a
+singly linked list made up of cons cells. Many Lisps can also store
+vectors (which are one-dimensional arrays), but those are never called
+lists. Around Lisp, and functional programming more generally, there
+is a fairly strong convention that lists are linked lists. The word
+_sequence_ is often used when a generic concept to cover lists,
+vectors, strings and streams is needed.
+
+load band -- Basically a disk image of memory pages. Used to boot the
+operating system on a Lisp machine.
+
+loop -- LOOP is an immensely versatile and correspondingly complicated
+macro that implements iteration in Common Lisp. Has also been ported
+to other Lisp dialects. LOOP is one of two infamously complicated
+facilities built into Common Lisp, the other being FORMAT. LOOP is
+often referred to as a classic example of over-engineering and even
+most experienced Lisp programmers have trouble understanding or
+remembering its intricacies. However, when used right it is very
+convenient.
+
+LMI -- see Lisp Machines, Inc.
+
+LTU -- see Lambda the Ultimate.
+
+== M
+
+M-expression -- (meta-expressions) An alternative to S-expressions
+also invented by John McCarthy and described together with the former
+in the first academic paper on Lisp. M-expressions were "more natural"
+to people accustomed to the common mathematical notation but soon fell
+out of favor and have been almost entirely replaced by S-expressions
+for the whole history of Lisp.
+
+Macintosh Common Lisp --
+
+MacIvory -- an extension board to old Apple Macintosh computers
+enabling them to run the Genera operating system alongside Apple's
+native MacOS.
+
+Maclisp -- (Originally spelled MACLISP.) The old traditional dialect
+of Lisp from Project MAC. Older than the Apple Macintosh, and hence
+not related to it.
+
+macro --
+
+macroexpand --
+
+macroexpand-1 -- Expand only one layer of macros, instead of expanding
+all of them at once. See _macroexpand_.
+
+macroexpansion -- The expanded form of a macro.
+
+macrology -- (humorous) The set of macros used to define a
+domain-specific langauges in a Lisp application (especially in a big
+application with complex macros). The connotation is that the macros
+in question are hard to understand due to complexity and age and may
+be over-engineered.
+
+MACSYMA -- (Project MAC SYMbolic Algebra, a pun on the mathematical
+term "maxima"). An early and influential symbolic computer algebra
+system from Project MAC at MIT. Served as inspiration for Mathematica.
+
+MCL -- See Macintosh Common Lisp. The earliest Common Lisp
+implementation for the Apple Macintosh. Was used to develop SK8, a
+purported continuation of HyperCard, at Apple's Advanced Technology
+Group. Not related to Project MAC.
+
+memoize --
+
+meta-circular interpreter --
+
+meta-macro -- a macro that defines another macro
+
+meta-object protocol --
+
+microcode -- a sort of high-level language that runs on a
+microprocessor and uses lower-level primitives implemented on that
+microprocessor to build more complex instructions visible to software
+
+microinstruction -- one CPU instruction visible to software running on
+a microprocessor, written in microcode.
+
+Minima -- a pared-down real-time version of the Genera operating
+system made for telephone switches by AT&T
+
+MIT -- (1) The Massachusetts Institute of Technology, one of the
+leading research universities in the United States and the birthplace
+of Lisp. (2) Abbreviated name for The MIT License.
+
+MIT License, the -- A permissive free software and open source license
+used by MIT. Probably the most popular license in the Lisp community.
+Note that even though this is called _The_ MIT License, MIT has also
+released software under other licenses.
+
+MOP -- see _meta-object protocol_
+
+most-positive-bignum -- a tongue-in-cheek hack to allocate the biggest
+bignum the Lisp heap is capable of storing.
+
+== N
+
+nil -- (also NIL) -- A value that means nothing, the empty list, and
+boolean false.
+
+nil-punning -- The use of the single value `nil` to mean many similar
+but different things. (Or to treat many different values as if they
+were all equal to `nil` in a particular context.) Whether this is a
+good or bad practice is a contentious issue, and is more a matter of
+taste than science. Scheme generally avoids nil-punning, whereas
+Common Lisp embraces it. Clojure is somewhere in the middle.
+
+== O
+
+OpenGenera -- A late version of the Genera operating system.
+Symbolics, Inc. realized that the Lisp machine market was becoming
+untenable because competitors were selling increasingly capable
+computers at a fraction of the price, thanks to a production volume
+that Symbolics had no hope of matching. This led to an effort to make
+a version of Genera that runs on top of Unix workstations based on the
+DEC Alpha microprocessor. (Alpha sported the world's first 64-bit
+computer architecture, which made Genera emulation possible, and was
+the fastest CPU in the world at the time of its release.) Symbolics
+also made the MacIvory extension board for Apple Macintosh computers.
+
+== P
+
+p -- A suffix used to name a predicate function or boolean variable in
+Lisp code. This usage also used to be a source of programmer humor
+around MIT when applied to everyday conversations. See _predicate_.
+
+pair -- Another name for a cons cell (but not for the `cons`
+operator). See _cons_.
+
+peek -- read raw data from a memory address, bypassing the Lisp
+runtime system
+
+plist -- Property list. Another way to store an association list
+(alist). Instead of storing each association pair as a cons cell
+inside the list, the pairs are "opened up" so that the first item in
+the plist is the first key, the second item in the plist is the first
+value, the third item in the plist is the second key, the fourth item
+in the plist is the second value, etc. This implies that a valid plist
+always has an even length, which is not always true for alists. See
+also _alist_ and _keyword argument_.
+
+poke -- write raw data to a memory address, bypassing the Lisp runtime
+system
+
+predicate -- A function that checks something and returns the boolean
+value true or false. Predicates are almost always idempotent and have
+no side effects. In Lisp it's common to end the name of a predicate
+with a `-p` suffix, for example `boundp` or `compiled-function-p`.
+Boolean variables also often have names ending with `-p` but they are
+not called predicates. The term _predicate_ comes from logic.
+
+Pre-Scheme -- a statically-typed dialect of Scheme with the efficiency
+and low-level machine access of C while retaining many of the
+desirable features of Scheme.
+
+primitive -- A built-in function provided directly by the virtual
+machine instead of being code that runs on top of the virtual machine.
+
+print -- write a Lisp object as text (into a string or a stream)
+
+printer -- the algorithm that produces text representations of Lisp
+objects.
+
+procedure -- the preferred term for a function in Scheme
+
+Project MAC --
+
+proper list -- see _improper list__
+
+== R
+
+restart -- Some Lisp dialects (notably Common Lisp and the MIT Lisp
+Machine dialects) have a condition system more powerful than exception
+systems.
+
+== S
+
+Scheme -- A small, clean dialect of Lisp designed in XYZA. Often
+contrasted with Common Lisp which has an opposite reputation as a
+full-featured but crufty language. Due to its clean design Scheme is
+often the preferred teaching language in the Lisp family. The name was
+inspired by "PLANNER". Scheme's most notable feature is
+call-with-current-continuation.
+
+sexp -- S-expression, symbolic expression. The native syntax of Lisp,
+where lists are enclosed by parentheses. Can be used to represent both
+code and data; it's largely due to S-expressions that Lisp can easily
+treat code as data (see _macro_).
+
+S-Graphics -- an early software suite for computer graphics made by
+Symbolics, Inc. for their line of Lisp Machines.
+
+Symbolics, Inc. -- one of two companies founded to commercialize the
+MIT Lisp Machine project. symbolics.com was the first dot-com domain
+ever registered.
+
+== R
+
+Racket -- A language and implementation that is an offshoot of the PLT
+Scheme implementation. It is still very closely related to Scheme,
+such that lots of Scheme code is equivalent or almost equivalent to
+Racket code. Racket adds modules, design-by-contract and optional
+static typing.
+
+read -- tokenize and parse an S-expression into a Lisp object that can
+be manipulated by the Lisp system.
+
+reader -- (as in "the Lisp reader"). The algorithm that tokenizes and
+parses S-expressions into Lisp objects. In most Lisp systems it can
+read many other kinds of objects besides symbols, numbers, and lists.
+In many systems it is also highly configurable. The dual term "writer"
+appears not to be in use, but the term "printer" is.
+
+real space -- low-level language function call stack, calling
+convention and register usage (usually the C language conventions of
+the underlying OS)
+
+reducer --
+
+RnRS -- _Revised^n Report on the Algorithmic Language Scheme_. The
+closest thing to a standard for the Scheme programming language.
+Renowned for its brevity and simplicity while still specifying a
+powerful language with plenty of room for extension. The most recent
+version is R7RS though R6RS is still in wide use.
+
+== S
+
+seq -- a common shortening of _sequence_
+
+SHRDLU -- An early Artificial Intelligence program that awed users
+with its ability to interpret sophisticated natural language commands.
+The program manipulated blocks in a three-dimensional world according
+to instructions from the user.
+
+special form --
+
+special variable --
+
+Switzerland -- a nickname for Project MAC at MIT. Trying to steer
+clear of Institute politics and packing many talented researchers,
+they were "neutral but heavily armed".
+
+syntax -- (1) the lexical and grammatical of a language. In Lisp,
+based around S-expressions. Lisp syntax is famously (and infamously)
+simple and uniform. Lisp aficionados generally have very little
+interest in syntax compared to people from other language communities.
+The old joke is that anyone who has got good enough at Lisp to change
+its syntax will already have grown to think the existing syntax is the
+best possible one. (2) another name for new syntax defined by a macro
+in Scheme (defmacro in Scheme is called define-syntax).
+
+== T
+
+T -- (1) A symbol used in some Lisps to represent the boolean value
+true. (2) An old implementation of Scheme.
+
+tag -- (1) A _type tag_ (which see). (2) a _go tag_ -- a goto label.
+(3) A piece of metadata associated with a Lisp object (in Arc). (4) A
+text markup tag; particularly an XML or HTML tag.
+
+tag bits -- See _type tag_.
+
+tagged architecture -- A computer architecture in which the CPU itself
+helps enforce type tagging, instead of the virtual machine having to
+do that all by itself. See _type tag_ and _Lisp machine_.
+
+tape -- Magnetic tape, the storage medium on which early Lisp Machine
+software from MIT was kept.
+
+thunk -- A function (or closure) stored as a value to be called later
+to finish an operation. compare to _promise_ and _future_ in modern
+async parlance. thunks are central in the implementation of lazy
+functional programming languages.
+
+TI Explorer -- A Lisp Machine marketed by Texas Instruments.
+
+transducer -- A generalization of a reducer in functional programming.
+Used in Clojure.
+
+type tag -- Some bits reserved in a machine word in CPU register or on
+the Lisp stack to indicate the data type of the value. Type tagging
+
+== U
+
+unwind-protect -- The unwieldy Lisp name for _try/finally_, i.e. a
+facility to ensure that some cleanup code is called even if some other
+code signals an exception.
+
+== V
+
+variable capture -- The act where a `let` expression in a macro
+shadows another variable by the same name defined around the site of
+the macro expansion. Usually the programmer using the macro is unaware
+that the macro has captured the variable, leading to a confusing bug.
+Occasionally the writer of the macro intends to capture a variable
+(i.e. to define a symbol that is convenient for the user of the
+macro), but much more often variable capture happens by accident due
+to simple negligence. Using `gensym` in the macro definition to make
+unique variants of symbols is the standard way to guard against
+variable capture. See also _gensym_ and _hygienic macro system_.
+
+vector -- A data type that is like a list (i.e. stores a sequence of
+items), but stored as an array instead of a linked list. this permits
+fast random access, but adding something to the front of the vector
+usually requires consing up a new vector. because a vector is only
+accessible as one unit, instead of being made out of cons cells where
+each cell is also its own independent object, it's not as fast and
+convenient to slice subvectors off of a vector, as it is to slice off
+tails of a list. Many Lisp dialects permit vectors to be extended with
+new items after creation, which is not generally true for arrays of
+more than one dimension. see also: array.
+
+== W
+
+warp -- Lisp function call stack, calling convention and register
+usage. Contrast with _real space_.
+
+warp speed -- The performance gain from being able to do a task
+entirely in Lisp without having to switch into the C calling
+convention (drop into _real space_) and back again.
+
+weak pair -- A special cons cell that doesn't cause the objects
+referenced by its car and cdr to be retained. The garbage collector
+will delete objects that have no references to them except from weak
+pairs. Weak references are used mainly to simplify caching: the
+application programmer doesn't need to manually delete every object
+from a cache that is forgotten by other parts of the program.
+
+world -- The complete state of a Lisp system in a form that can be
+serialized to disk and then loaded back later.
+
+write -- Print a Lisp object as an S-expression using a representation
+that can be read back in using the Lisp reader. There are always going
+to be a few objects that simply don't have a readable representation;
+most Lisp printers have a special notation signifying "unreadable
+object" that is used to write those objects.
+
+== X
+
+== Y
+
+Y combinator -- A famous fixed-point combinator in lambda calculus.
+Enables the writing of self-referential recursive functions.
+
+== Z
+
+ZetaLisp -- The dialect of Lisp used as the high-level programming
+language on MIT Lisp Machines and their commercial offshoots.
+
+ZWEI -- (A recursive acronym: _ZWEI Was Eine Initially_.) An early
+Emacs-style text editor at MIT.
+
+== Sources
+
+http://catb.org/jargon/html/go01.html
+
+https://www.emacswiki.org/emacs/Glossary
